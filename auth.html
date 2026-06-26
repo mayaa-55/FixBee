@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ServiceHub – تسجيل الدخول</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { background: linear-gradient(135deg, #0b1f4a 0%, #1a3a7c 45%, #1e4db7 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  body::before { content:''; position:fixed; width:500px; height:500px; border-radius:50%; background:rgba(255,255,255,0.03); top:-150px; right:-150px; pointer-events:none; }
+  body::after  { content:''; position:fixed; width:350px; height:350px; border-radius:50%; background:rgba(255,255,255,0.03); bottom:-100px; left:-100px; pointer-events:none; }
+
+  .auth-wrap { width: 100%; max-width: 440px; position: relative; z-index: 1; }
+
+  .auth-brand {
+    text-align: center; margin-bottom: 28px;
+    animation: fadeUp 0.5s 0s both;
+  }
+  .auth-brand .ab-icon {
+    width: 68px; height: 68px; border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent), #60a5fa);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 30px; margin-bottom: 14px;
+    box-shadow: 0 12px 32px rgba(37,99,235,0.5);
+  }
+  .auth-brand h1 { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+  .auth-brand p  { color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 5px; }
+
+  .auth-card {
+    background: #fff; border-radius: 24px; padding: 36px 32px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+    animation: fadeUp 0.5s 0.1s both;
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  .auth-tabs { display: flex; background: var(--surface2); border-radius: 12px; padding: 4px; margin-bottom: 28px; }
+  .auth-tab {
+    flex: 1; text-align: center; padding: 11px;
+    font-size: 14px; font-weight: 800; color: var(--text-muted);
+    cursor: pointer; border-radius: 10px; transition: all var(--transition);
+    border: none; background: none; font-family: inherit;
+  }
+  .auth-tab.active { background: #fff; color: var(--accent); box-shadow: var(--shadow-sm); }
+
+  .auth-form { display: none; }
+  .auth-form.active { display: block; animation: fadeUp 0.3s both; }
+
+  .auth-error {
+    background: var(--danger-soft); border: 1px solid #fecaca; color: #dc2626;
+    padding: 11px 14px; border-radius: var(--radius-sm); font-size: 13px;
+    margin-bottom: 16px; display: none; font-weight: 600;
+  }
+
+  .divider { text-align: center; margin: 20px 0; position: relative; color: var(--text-light); font-size: 12px; }
+  .divider::before, .divider::after { content:''; position:absolute; top:50%; height:1px; background:var(--border); width: calc(50% - 24px); }
+  .divider::before { right: 0; } .divider::after { left: 0; }
+
+  .demo-box {
+    background: #eff6ff; border: 1px solid #bfdbfe; border-radius: var(--radius-sm);
+    padding: 14px 16px; margin-top: 20px; font-size: 13px; line-height: 2;
+    color: var(--text-muted);
+  }
+  .demo-box b { color: var(--accent); }
+  .demo-box .demo-fill { color: var(--accent); font-weight: 700; cursor: pointer; text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="auth-brand">
+    <div class="ab-icon">🏠</div>
+    <h1>ServiceHub</h1>
+    <p>منصة الصيانة المنزلية الذكية</p>
+  </div>
+  <div class="auth-card">
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">تسجيل الدخول</button>
+      <button class="auth-tab"        onclick="switchTab('register')">إنشاء حساب</button>
+    </div>
+
+    <div id="auth-error" class="auth-error"></div>
+
+    <!-- LOGIN -->
+    <div id="form-login" class="auth-form active">
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+        <input class="form-control" type="email" id="login-email" placeholder="example@email.com">
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input class="form-control" type="password" id="login-password" placeholder="••••••••">
+      </div>
+      <button class="btn btn-primary btn-wide" onclick="handleLogin()">🔐 تسجيل الدخول</button>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="form-register" class="auth-form">
+      <div class="form-group">
+        <label>الاسم الكامل</label>
+        <input class="form-control" type="text" id="reg-name" placeholder="محمد أحمد">
+      </div>
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+        <input class="form-control" type="email" id="reg-email" placeholder="example@email.com">
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input class="form-control" type="password" id="reg-password" placeholder="••••••••">
+      </div>
+      <button class="btn btn-primary btn-wide" onclick="handleRegister()">✅ إنشاء حساب</button>
+    </div>
+
+    <div class="demo-box">
+      🔵 <b>مستخدم:</b> <span class="demo-fill" onclick="fillUser()">user@demo.com / 123456</span><br>
+      🔴 <b>أدمن:</b> <span class="demo-fill" onclick="fillAdmin()">admin@demo.com / admin123</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Shared DB (stored in localStorage for cross-page)
+  function getDB() {
+    const raw = localStorage.getItem('sh_db');
+    if (raw) return JSON.parse(raw);
+    const db = {
+      users: [
+        {id:'u1', name:'أحمد محمد', email:'user@demo.com',  password:'123456',   role:'user'},
+        {id:'u2', name:'المدير',    email:'admin@demo.com', password:'admin123', role:'admin'},
+      ],
+      requests: [
+        {id:'r1',userId:'u1',service:'plumbing',   desc:'تسرب مياه في الحمام',  location:'المنزل',date:'2025-04-20',status:'accepted',rating:null},
+        {id:'r2',userId:'u1',service:'electrical', desc:'عطل في لوحة الكهرباء', location:'العمل',  date:'2025-04-18',status:'pending', rating:null},
+        {id:'r3',userId:'u1',service:'ac',         desc:'التكييف لا يبرد',      location:'الفيلا', date:'2025-04-15',status:'rejected',rating:null},
+        {id:'r4',userId:'u1',service:'cleaning',   desc:'تنظيف شامل للشقة',   location:'المنزل',date:'2025-04-10',status:'accepted',rating:4},
+      ],
+      notifications: [
+        {id:'n1',userId:'u1',msg:'تم قبول طلب السباكة الخاص بك ✅',time:'منذ ساعة',read:false},
+        {id:'n2',userId:'u1',msg:'تم رفض طلب التكييف ❌',time:'منذ يومين',read:true},
+      ]
+    };
+    localStorage.setItem('sh_db', JSON.stringify(db));
+    return db;
+  }
+  function saveDB(db) { localStorage.setItem('sh_db', JSON.stringify(db)); }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (tab==='login'&&i===0)||(tab==='register'&&i===1)));
+    document.getElementById('form-login').classList.toggle('active', tab==='login');
+    document.getElementById('form-register').classList.toggle('active', tab==='register');
+    document.getElementById('auth-error').style.display = 'none';
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('auth-error');
+    el.textContent = msg; el.style.display = 'block';
+  }
+
+  function handleLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    const pass  = document.getElementById('login-password').value;
+    if (!email || !pass) return showError('يرجى ملء جميع الحقول');
+    const db   = getDB();
+    const user = db.users.find(u => u.email===email && u.password===pass);
+    if (!user) return showError('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+    sessionStorage.setItem('sh_user', JSON.stringify(user));
+    window.location.href = user.role === 'admin' ? 'admin.html' : 'user.html';
+  }
+
+  function handleRegister() {
+    const name  = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const pass  = document.getElementById('reg-password').value;
+    if (!name||!email||!pass) return showError('يرجى ملء جميع الحقول');
+    const db = getDB();
+    if (db.users.find(u=>u.email===email)) return showError('البريد الإلكتروني مسجل مسبقاً');
+    const newUser = {id:'u'+Date.now(), name, email, password:pass, role:'user'};
+    db.users.push(newUser);
+    saveDB(db);
+    sessionStorage.setItem('sh_user', JSON.stringify(newUser));
+    window.location.href = 'user.html';
+  }
+
+  function fillUser()  { switchTab('login'); document.getElementById('login-email').value='user@demo.com';  document.getElementById('login-password').value='123456'; }
+  function fillAdmin() { switchTab('login'); document.getElementById('login-email').value='admin@demo.com'; document.getElementById('login-password').value='admin123'; }
+
+  // Redirect if already logged in
+  const existing = sessionStorage.getItem('sh_user');
+  if (existing) {
+    const u = JSON.parse(existing);
+    window.location.href = u.role==='admin' ? 'admin.html' : 'user.html';
+  }
+</script>
+</body>
+</html>
