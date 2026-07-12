@@ -1,4 +1,4 @@
-﻿// ══════════════════════════════════════
+// ══════════════════════════════════════
 //  DATA HELPERS
 // ══════════════════════════════════════
 const SERVICES = [
@@ -39,7 +39,7 @@ const BLABEL_MAP = {pending:'معلق',     accepted:'مقبول',     rejected:
 let CU = null; // current user
 (function() {
   const raw = sessionStorage.getItem('sh_user');
-  if (!raw) { window.location.href = 'auth.html'; return; }
+  if (!raw) { window.location.href = 'index.html'; return; }
   CU = JSON.parse(raw);
   if (CU.role !== 'user') { window.location.href = 'admin.html'; return; }
   initUser();
@@ -56,7 +56,7 @@ function initUser() {
 
 function logout() {
   sessionStorage.removeItem('sh_user');
-  window.location.href = 'auth.html';
+  window.location.href = 'index.html';
 }
 
 // ══════════════════════════════════════

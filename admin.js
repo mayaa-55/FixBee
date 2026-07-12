@@ -1,4 +1,4 @@
-﻿// ══════════════════════════════════════
+// ══════════════════════════════════════
 //  DATA
 // ══════════════════════════════════════
 const SERVICES = [
@@ -36,7 +36,7 @@ const LABEL_MAP  = {pending:'معلق ⏳',  accepted:'مقبول ✅',  rejecte
 let CU = null;
 (function() {
   const raw = sessionStorage.getItem('sh_user');
-  if (!raw) { window.location.href = 'auth.html'; return; }
+  if (!raw) { window.location.href = 'index.html'; return; }
   CU = JSON.parse(raw);
   if (CU.role !== 'admin') { window.location.href = 'user.html'; return; }
   initAdmin();
@@ -52,7 +52,7 @@ function initAdmin() {
 
 function logout() {
   sessionStorage.removeItem('sh_user');
-  window.location.href = 'auth.html';
+  window.location.href = 'index.html';
 }
 
 // ══════════════════════════════════════
