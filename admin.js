@@ -43,8 +43,7 @@ let CU = null;
 })();
 
 function initAdmin() {
-  const initials = CU.name.split(' ').map(n=>n[0]).join('').substring(0,2);
-  document.getElementById('uc-avatar').textContent = initials;
+  document.getElementById('uc-avatar').textContent = initials(CU.name);
   document.getElementById('uc-name').textContent   = CU.name;
   updatePendingBadge();
   renderDashboard();
@@ -332,6 +331,7 @@ function saveProfile() {
   CU.name = name;
   sessionStorage.setItem('sh_user', JSON.stringify(CU));
   document.getElementById('uc-name').textContent = name;
+  document.getElementById('uc-avatar').textContent = initials(name);
   renderProfile();
   toast('✅ تم حفظ البيانات بنجاح');
 }

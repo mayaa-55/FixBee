@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -22,13 +22,12 @@
     <button class="nav-link active" data-view="home"          onclick="navigate('home')">        <span class="nl-icon">🏠</span> الرئيسية</button>
     <button class="nav-link"        data-view="request"       onclick="navigate('request')">     <span class="nl-icon">➕</span> طلب خدمة</button>
     <button class="nav-link"        data-view="my-requests"   onclick="navigate('my-requests')"> <span class="nl-icon">📋</span> طلباتي</button>
-    <button class="nav-link"        data-view="notifications" onclick="navigate('notifications')"><span class="nl-icon">🔔</span> الإشعارات<span class="nav-badge" id="nav-badge" style="display:none">0</span></button>
     <button class="nav-link"        data-view="locations"     onclick="navigate('locations')">   <span class="nl-icon">📍</span> مواقعي</button>
     <button class="nav-link"        data-view="profile"       onclick="navigate('profile')">     <span class="nl-icon">👤</span> حسابي</button>
   </div>
 
   <div class="navbar-end">
-    <div class="notif-btn" onclick="navigate('notifications')" title="الإشعارات">
+    <div class="notif-btn" data-view="notifications" onclick="navigate('notifications')" title="الإشعارات">
       🔔<span class="notif-dot" id="notif-dot"></span>
     </div>
     <div class="user-chip" id="user-chip">

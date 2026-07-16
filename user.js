@@ -300,8 +300,14 @@ function updateBadge() {
   const cnt = (db.notifications||[]).filter(n=>n.userId===CU.id&&!n.read).length;
   const dot   = document.getElementById('notif-dot');
   const badge = document.getElementById('nav-badge');
-  if (dot)   dot.style.display   = cnt ? 'block' : 'none';
-  if (badge) { badge.style.display = cnt ? 'inline' : 'none'; badge.textContent = cnt; }
+  if (dot) {
+    dot.style.display = cnt ? 'flex' : 'none';
+    dot.textContent = cnt;
+  }
+  if (badge) {
+    badge.style.display = cnt ? 'inline' : 'none';
+    badge.textContent = cnt;
+  }
 }
 
 // ══════════════════════════════════════
@@ -437,6 +443,7 @@ function saveProfile() {
   CU.name = name;
   sessionStorage.setItem('sh_user', JSON.stringify(CU));
   document.getElementById('uc-name').textContent = name;
+  document.getElementById('uc-avatar').textContent = userInitials(name);
   document.getElementById('hero-name').textContent = name.split(' ')[0];
   renderProfile();
   toast('✅ تم حفظ البيانات بنجاح');
