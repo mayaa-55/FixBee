@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -8,11 +8,22 @@
 <style>
   /* Admin-specific accents */
   :root { --accent: #7c3aed; --accent-light: #8b5cf6; --accent-glow: rgba(124,58,237,0.18); }
-  .navbar { background: #1e0a3c; }
-  .brand-icon { background: linear-gradient(135deg, #7c3aed, #a78bfa) !important; }
+  .navbar      { background: #1e0a3c; }
+  .brand-icon  { background: linear-gradient(135deg, #7c3aed, #a78bfa) !important; }
   .btn-primary { background: linear-gradient(135deg, #1e0a3c, #7c3aed); }
-  .uc-avatar { background: linear-gradient(135deg, #c4b5fd, #8b5cf6) !important; color: #fff !important; }
+  .btn-primary:hover { box-shadow: 0 6px 20px rgba(124,58,237,0.45); }
+  .uc-avatar   { background: linear-gradient(135deg, #c4b5fd, #8b5cf6) !important; color: #fff !important; }
   .hero-banner { background: linear-gradient(135deg, #1e0a3c 0%, #4c1d95 50%, #7c3aed 100%); }
+  .profile-hero { background: linear-gradient(135deg, #1e0a3c 0%, #4c1d95 55%, #7c3aed 100%); }
+  .profile-info h2 { color: #fff; }
+  .profile-info p  { color: rgba(255,255,255,0.65); }
+  .section-title .st-icon { background: linear-gradient(135deg, #1e0a3c, #7c3aed); }
+  .nav-link.active::after { background: #a78bfa; }
+  .filter-chip:hover, .filter-chip.active { border-color: #7c3aed; color: #7c3aed; }
+  .filter-chip.active { background: #f5f3ff; }
+  .form-control:focus { border-color: #7c3aed; background: #f5f3ff; }
+  .req-card:hover { border-color: #a78bfa; }
+  .loc-card:hover { border-color: #7c3aed; }
   .admin-ring { display:inline-flex;align-items:center;gap:6px;background:#ede9fe;color:#7c3aed;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:800; }
 </style>
 </head>
